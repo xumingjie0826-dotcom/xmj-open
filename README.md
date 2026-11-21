@@ -17,7 +17,6 @@
 | 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 已收藏 |
 | 03 | vibe-knowledge-film | [HeyChengC/vibe-knowledge-film](https://github.com/HeyChengC/vibe-knowledge-film) | 代码直出「无旁白」知识短片（抖音 Vibe 知识大赏风） | 高（科普向） | 中（需 Chrome/ffmpeg） | 低 | 已收藏 |
 | 04 | claude-mem | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | 给 AI coding agent 的持久记忆：跨会话不忘事 | 高（重度用 agent） | 中（未点名 Trae） | 中 | 已收藏 |
-| 05 | jiangshan-map（江山时序） | [DeanChensj/jiangshan-map](https://github.com/DeanChensj/jiangshan-map) | 可拖时间/点城读史的中国历史交互舆图（前403—今） | 高（历史人文向） | 高（网页直接玩） | 低（注意 GPL-3.0） | 已收藏 |
 
 ---
 
@@ -147,40 +146,6 @@ npx claude-mem install          # 交互式：自动发现本机 agent，让你�
 - `npm install -g claude-mem` 只装 SDK，**不会注册插件钩子**，别用这条。
 - 想省 token/省心：可在设置里关掉匿名分析、云同步，改用自备 key 当记忆 provider。
 - Trae 未点名，接入要自己试 MCP 或看它是否有 Agentskills 装法。
-
----
-
-## 05 · jiangshan-map（江山时序）
-
-| 字段 | 内容 |
-|------|------|
-| 仓库 | https://github.com/DeanChensj/jiangshan-map |
-| 在线版 | **https://deanchen.me/jiangshan-map/** |
-| 协议 / 版本 | **GPL-3.0** · 约 129MB |
-| 一句话 | 一张可拖时间轴、点城读史的中国历史交互舆图（前 403 年—今），另附 agent skill `jiangshan-atlas` + MCP server。 |
-| 价值 | 高（历史 / 地理 / 人文向）。查古诗词与历史事件的「年份 + 地点 + 政区沿革 + 人物行迹」。 |
-| 可用性 | 高。网页版**直接在线玩**；当 skill 用需 Python3（`--inspect` 走 Node，`--out` 截图走 Playwright）。 |
-| 风险 | 低（本地读写 + 生成深链，无遥测）；**GPL-3.0 有传染性**，二次分发/商用它的代码要守 GPL。 |
-| 状态 | 已收藏 |
-
-**直接用（网页版）**
-```
-https://deanchen.me/jiangshan-map/
-```
-深链示例（可直接收藏/分享）：
-- 韩愈「雪拥蓝关马不前」→ `https://deanchen.me/jiangshan-map/?year=819&place=蓝关`
-- 苏轼贬谪路线 → `https://deanchen.me/jiangshan-map/?year=1079,1080,1094,1097&place=湖州,黄州,惠州,儋州`
-- 李白 × 杜甫相遇 → `https://deanchen.me/jiangshan-map/?person=libai,dufu`
-
-**当 skill 用**
-```bash
-python3 skills/jiangshan-atlas/scripts/jiangshan.py --year 1102 --place 浔阳 --hover 江州 --inspect
-python3 skills/jiangshan-atlas/scripts/jiangshan.py --person libai,dufu --inspect --out /tmp/out.png
-```
-
-**注意**
-- 早于前 403 年的事件会被 clamp 到 `-403`（正文里说明真实年份）。
-- 截图 `--out` 需联网拉约 3MB 地图资源（6–12s），建议开头就开网。
 
 ---
 <!-- 后续条目：复制上面的分节模板，编号 ++，并在顶部索引表加一行 -->
