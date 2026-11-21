@@ -48,6 +48,7 @@
 | 可用性 | **基础版（只产出 HTML）现在就能用、零依赖**；完整版需装 Python3/Node/ffmpeg/playwright + 生图 key，暂缓。 |
 | 风险 | 低（核心流程本地零联网；云功能仅火山/字节/OpenAI，需自带 key 且有 `--yes` 闸门）。 |
 | 状态 | 已收藏 |
+| 备注 | **可用于我的个人工作台**（前端是纯 HTML 网页栈）：对工作台页面做重做/美化。也做 PPT/视频/信息图等更广的物料。 |
 
 **安装**（装完务必自检目录含 references/ assets/ scripts/ demos/）
 ```bash
@@ -212,6 +213,7 @@ deeptutor start                  # 起 Web app（后端+前端）
 | 可用性 | 中。未点名 Trae，但走通用装法 `npx skills add nutlope/hallmark -g`，Trae 可试；需 Node 18+，浏览器检查另需 puppeteer-core + Chrome。 |
 | 风险 | 低。MIT 无限制；照片库只存 Wikimedia 链接、按各自许可署名，不碰 Unsplash / Pexels（其条款禁止 AI 工具选图）。 |
 | 状态 | 已收藏 |
+| 备注 | **可用于我的个人工作台**（同为 HTML 网页栈）。建议先 `/hallmark audit` 再小范围 redesign（工作台原型是 275KB 大单文件、含大量 JS，别一上来整体重做）。 |
 
 **安装**
 ```bash
