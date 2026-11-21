@@ -18,6 +18,21 @@
 | 03 | vibe-knowledge-film | [HeyChengC/vibe-knowledge-film](https://github.com/HeyChengC/vibe-knowledge-film) | 代码直出「无旁白」知识短片（抖音 Vibe 知识大赏风） | 高（科普向） | 中（需 Chrome/ffmpeg） | 低 | 已收藏 |
 | 04 | claude-mem | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | 给 AI coding agent 的持久记忆：跨会话不忘事 | 高（重度用 agent） | 中（未点名 Trae） | 中 | 已收藏 |
 
+## 评估进度（8 条原始清单）
+
+> 换账号/换电脑后，看这里就知道还剩哪些没分析。
+
+| 原编号 | 名称 | 结果 | 清单编号 |
+|---|---|---|---|
+| 1 | huashu-design | 已收藏 | 01 |
+| 2 | plannotator | 已收藏 | 02 |
+| 3 | vibe-knowledge-film | 已收藏 | 03 |
+| 4 | last30days-skill | 已评估 → **移除**（不支持中文平台） | — |
+| 5 | jiangshan-map（江山时序） | 已评估 → **暂不收藏**（偏兴趣向） | — |
+| 6 | claude-mem | 已收藏 | 04 |
+| 7 | DeepTutor | **待评估** | — |
+| 8 | hallmark | **待评估** | — |
+
 ---
 
 ## 01 · huashu-design（花叔Design）
@@ -132,6 +147,7 @@ python engine/render.py <工程目录> --sheet 3 8 15 22   # 指定时刻拼图�
 | 可用性 | 中。需 Node `^20.19 || >=22.12`，会自动装 Bun；向量检索用 uv。`npx claude-mem install` 会扫描本机已装的 agent 让你勾选。官方点名 Claude Code / Codex / Cursor / OpenCode + 11 个（Copilot CLI / Goose / Roo / Warp / Zed 仅能查记忆，会话不被记录）；**未点名 Trae**，但有大量宿主适配 + MCP。 |
 | 风险 | 中。① 默认开启**匿名分析**（`npx claude-mem telemetry disable` 可关）；② 记忆存本机 `~/.claude-mem`，云同步为 opt-in；③ 默认引导「claude-mem observer」，30 天试用后需订阅（也可改用自备 OpenRouter/Gemini key 或 Anthropic plan）；④ 它会**记录你的会话内容**；⑤ 自动安装 Bun / uv 运行时。 |
 | 状态 | 已收藏 |
+| 备注 | **加 MCP**。计划用 MCP 方式接入（自建 memory MCP server 或挂其 MCP），实现 Trae / WorkBuddy 等多 agent 共享记忆。注意：记忆是私密内容，跨设备同步必须私有 + 有认证，**不可进公开仓库**。 |
 
 **安装**
 ```bash
