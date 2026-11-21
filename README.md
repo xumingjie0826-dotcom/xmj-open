@@ -16,6 +16,7 @@
 | 01 | huashu-design（花叔Design） | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | HTML 原生设计 skill（原型/deck/动效/信息图等） | 高 | 基础版即可用 | 低 | 已收藏 |
 | 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 已收藏 |
 | 03 | vibe-knowledge-film | [HeyChengC/vibe-knowledge-film](https://github.com/HeyChengC/vibe-knowledge-film) | 代码直出「无旁白」知识短片（抖音 Vibe 知识大赏风） | 高（科普向） | 中（需 Chrome/ffmpeg） | 低 | 已收藏 |
+| 04 | claude-mem | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | 给 AI coding agent 的持久记忆：跨会话不忘事 | 高（重度用 agent） | 中（未点名 Trae） | 中 | 已收藏 |
 
 ---
 
@@ -117,6 +118,34 @@ python engine/render.py <工程目录> --sheet 3 8 15 22   # 指定时刻拼图�
 **注意**
 - 两种画风：`C 夜曲`（抽象/看不见的机制）、`B 寓言`（心理/行为机制）。
 - 依赖本机 Chrome，不是自带浏览器。
+
+---
+
+## 04 · claude-mem
+
+| 字段 | 内容 |
+|------|------|
+| 仓库 | https://github.com/thedotmack/claude-mem |
+| 协议 / 版本 | Apache-2.0 · v16.0.2 · 约 108MB |
+| 一句话 | 给 AI coding agent 的**持久记忆**：它在旁边跑一个「观察员」agent 边干活边记笔记，下次会话开场就带着上次的记忆。 |
+| 价值 | 高（对重度使用 coding agent 的人）。直接解决「agent 每次开新会话都失忆」的痛点。 |
+| 可用性 | 中。需 Node `^20.19 || >=22.12`，会自动装 Bun；向量检索用 uv。`npx claude-mem install` 会扫描本机已装的 agent 让你勾选。官方点名 Claude Code / Codex / Cursor / OpenCode + 11 个（Copilot CLI / Goose / Roo / Warp / Zed 仅能查记忆，会话不被记录）；**未点名 Trae**，但有大量宿主适配 + MCP。 |
+| 风险 | 中。① 默认开启**匿名分析**（`npx claude-mem telemetry disable` 可关）；② 记忆存本机 `~/.claude-mem`，云同步为 opt-in；③ 默认引导「claude-mem observer」，30 天试用后需订阅（也可改用自备 OpenRouter/Gemini key 或 Anthropic plan）；④ 它会**记录你的会话内容**；⑤ 自动安装 Bun / uv 运行时。 |
+| 状态 | 已收藏 |
+
+**安装**
+```bash
+npx claude-mem install          # 交互式：自动发现本机 agent，让你勾选要接哪些
+# 或在 Claude Code 里：
+/plugin marketplace add thedotmack/claude-mem
+/plugin install claude-mem
+```
+不想接账号：加 `--provider openrouter`（或 gemini），或设 `CLAUDE_MEM_ONLINE_OPTIN=false`；非交互环境：`npx claude-mem install --setup defer`。
+
+**注意**
+- `npm install -g claude-mem` 只装 SDK，**不会注册插件钩子**，别用这条。
+- 想省 token/省心：可在设置里关掉匿名分析、云同步，改用自备 key 当记忆 provider。
+- Trae 未点名，接入要自己试 MCP 或看它是否有 Agentskills 装法。
 
 ---
 <!-- 后续条目：复制上面的分节模板，编号 ++，并在顶部索引表加一行 -->
