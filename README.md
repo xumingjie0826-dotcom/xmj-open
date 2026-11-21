@@ -14,7 +14,9 @@
 | # | 名称 | 仓库 | 一句话 | 价值 | 可用性 | 风险 | 状态 |
 |---|------|------|--------|------|--------|------|------|
 | 01 | huashu-design（花叔Design） | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | HTML 原生设计 skill（原型/deck/动效/信息图等） | 高 | 基础版即可用 | 低 | 已收藏 |
-| 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 评估中 |
+| 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 已收藏 |
+| 03 | vibe-knowledge-film | [HeyChengC/vibe-knowledge-film](https://github.com/HeyChengC/vibe-knowledge-film) | 代码直出「无旁白」知识短片（抖音 Vibe 知识大赏风） | 高（科普向） | 中（需 Chrome/ffmpeg） | 低 | 已收藏 |
+| 04 | last30days-skill | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 按真人互动信号排名的人物/公司/话题调研引擎 | 高 | 中（走 Agentskills/MCP） | 中 | 已收藏 |
 
 ---
 
@@ -84,6 +86,69 @@ plannotator inbox                        # 多 agent 消息台
 - Trae 不在官方支持列表；最可行的接入是 CLI，或 `plannotator inbox mcp`（MCP 通道，任意 agent 可接）。
 - 默认匿名遥测无界面开关，需环境变量 `NO_ANON_PING` 关闭。
 - 安装器是 `curl | bash` 且下载预编译二进制，属主要风险面；介意可跳过或自行校验 release 校验和。
+
+---
+
+## 03 · vibe-knowledge-film
+
+| 字段 | 内容 |
+|------|------|
+| 仓库 | https://github.com/HeyChengC/vibe-knowledge-film |
+| 协议 / 版本 | MIT（引擎/脚本/文档）· 约 93MB |
+| 一句话 | 做「抖音 Vibe 知识大赏」式的**无旁白知识短片**（2–5 分钟、16:9）：观众读底部字幕，同时看屏上把这句话演出来。全片由代码逐帧画出（Canvas + seek(t) + Playwright + ffmpeg）。 |
+| 价值 | 高（面向做科普/知识短片的人），题材很垂直；对不做视频的人用不上。 |
+| 可用性 | 中。需 Python3 + playwright + 本机 Google Chrome + ffmpeg；把这整个目录放进 agent 的 skills 目录即可，非 Trae 专属。渲染链较重（逐帧截图再压片）。 |
+| 风险 | 低。纯本地渲染，无遥测；唯一联网是 `get_fonts.py` 从 Google Fonts 官方 raw 拉取开源字体。**版权提醒**：作者明确说 `references/analysis.md`、`references/prompts.md` 与 `examples/stim_B`、`info_C` 用了他人短片的字幕/画面设计，属学习对照，不要当自己作品发布。 |
+| 状态 | 已收藏 |
+
+**安装**
+```bash
+pip install -r requirements.txt
+python -m playwright install
+python engine/get_fonts.py     # 下载开源字体（仓库不含字体）
+```
+
+**使用**（把整份文案或一个选题丢给它；它自己选画风、写字幕稿、排分镜表、建工程，先出 30 秒样片再铺全片）
+```bash
+python scripts/new_film.py <工程目录> --world C   # C=夜曲（讲底层知识） / B=寓言
+python engine/render.py <工程目录> --serve        # 浏览器预览
+python engine/render.py <工程目录> --sheet 3 8 15 22   # 指定时刻拼图自查
+```
+
+**注意**
+- 两种画风：`C 夜曲`（抽象/看不见的机制）、`B 寓言`（心理/行为机制）。
+- 依赖本机 Chrome，不是自带浏览器。
+
+## 04 · last30days-skill
+
+| 字段 | 内容 |
+|------|------|
+| 仓库 | https://github.com/mvanhorn/last30days-skill |
+| 协议 / 版本 | MIT · v4.4.0 · 约 69MB · 曾登 GitHub Trending 当日第 1 |
+| 一句话 | 「按真人互动信号排名」的研究引擎：并行搜 Reddit / X / YouTube / TikTok / HN / Polymarket / GitHub，外加专利、招聘等，再由 LLM 汇总成一份简报。 |
+| 价值 | 高（做人物/公司/话题调研时）。卖点是「搜的是人不是编辑」。 |
+| 可用性 | 中。Claude Code 走 plugin marketplace；Codex/Cursor/Copilot/Gemini 等 50+ Agent Skills 宿主走 `npx skills add … -g`；另有 MCP server。默认零配置即可用 Reddit/HN/Polymarket/GitHub；完整能力需自备各平台 key/CLI。Trae 未点名，走 Agentskills / MCP 路线。 |
+| 风险 | 中（能力大、触点多，但文档极其完整、开关齐全）。要点：会把你填的 topic 发给多个第三方服务；可读取浏览器 cookie（默认关，需明确同意）；会安装外部 CLI（npx 包 / yt-dlp 等）；默认**无遥测**。 |
+| 状态 | 已收藏 |
+
+**安装**
+```bash
+# Claude Code
+/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days
+# 其他 Agentskills 宿主（Codex/Cursor/Copilot/Gemini…）
+npx skills add mvanhorn/last30days-skill -g
+```
+
+**使用**
+```
+/last30days <人物名 / 公司名 / 话题>      # 例：/last30days Peter Steinberger
+```
+首跑会弹配置向导，30 秒内解锁 X / YouTube / TikTok / arXiv 等更多来源。
+
+**注意**
+- 是「研究工具」不是「搜索框」：输出的是一份综合简报，耗 token、耗时间。
+- 注意数据外发范围：topic 会送到所有启用的来源；想要纯本地重排，就别配 Gemini/OpenAI/xAI/OpenRouter 的 key。
 
 ---
 <!-- 后续条目：复制上面的分节模板，编号 ++，并在顶部索引表加一行 -->
