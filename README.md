@@ -14,6 +14,7 @@
 | # | 名称 | 仓库 | 一句话 | 价值 | 可用性 | 风险 | 状态 |
 |---|------|------|--------|------|--------|------|------|
 | 01 | huashu-design（花叔Design） | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | HTML 原生设计 skill（原型/deck/动效/信息图等） | 高 | 基础版即可用 | 低 | 已收藏 |
+| 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 评估中 |
 
 ---
 
@@ -48,6 +49,41 @@ git clone https://github.com/alchaincyf/huashu-design.git <你的skills目录>/h
 - 不能只拷 SKILL.md，要整包安装。
 - 会在 `~/.huashu-design/` 写本地记忆（口味原话 + 项目绝对路径），不上传；可设 `HUASHU_DESIGN_HOME` 改位置或删目录。
 - 偶发 `git ls-remote` 查版本，可写 `off` 关闭。
+
+---
+## 02 · plannotator
+
+| 字段 | 内容 |
+|------|------|
+| 仓库 | https://github.com/backnotprop/plannotator |
+| 协议 / 版本 | MIT OR Apache-2.0 · v0.29.1 · 约 200MB（是完整 monorepo 产品，不是小 skill） |
+| 一句话 | 给 AI 编码 agent 用的本地浏览器「审阅/批注」界面：批注计划、spec、markdown、HTML、diff/PR，反馈直接回传给 agent；另有 Inbox（多 agent 消息台）和终端版。 |
+| 价值 | 高（对重度使用 coding agent 的人）。把「看计划 / 看 diff / 提反馈」从终端搬到可视化界面。 |
+| 可用性 | 中。官方支持 Claude Code / Codex / Gemini CLI / OpenCode / Kiro / Droid / Amp / **DeepSeek Harness** / Copilot CLI / Pi，**未列 Trae**。在 Trae 里只能走 CLI（`plannotator annotate`、`plannotator review`）或 inbox 的 MCP 通道，属「能用但要手动接」，需装其独立二进制。 |
+| 风险 | 中。① `curl \| bash` 第三方安装器 + 从 GitHub Releases 下载二进制；② **默认开启匿名遥测**（每天 ping，无 IP/无 ID，可用 `NO_ANON_PING` 关闭，无界面开关）；③ 分享功能会上传到其服务器（加密、7 天过期，`PLANNOTATOR_SHARE=disabled` 可关）。安全建设规范（SHA256 / SLSA 溯源 / SBOM / Grype）。 |
+| 状态 | 评估中 |
+
+**安装**
+```bash
+curl -fsSL https://plannotator.ai/install.sh | bash      # 装二进制 + 自动配置各 agent（不含 Trae）
+# 只要二进制、不要任何 agent 配置：
+curl -fsSL https://plannotator.ai/install.sh | bash -s -- --minimal
+```
+
+**使用**
+```
+/plannotator-annotate README.md          # 批注本地 markdown
+/plannotator-review                      # 审阅未提交改动
+/plannotator-review <PR-URL>             # 审阅 GitHub PR
+plannotator annotate http://localhost:5173   # 批注本地运行中的站点
+plannotator inbox                        # 多 agent 消息台
+```
+（Codex 里换成 `!plannotator …` 或 `$plannotator-*` skill）
+
+**注意**
+- Trae 不在官方支持列表；最可行的接入是 CLI，或 `plannotator inbox mcp`（MCP 通道，任意 agent 可接）。
+- 默认匿名遥测无界面开关，需环境变量 `NO_ANON_PING` 关闭。
+- 安装器是 `curl | bash` 且下载预编译二进制，属主要风险面；介意可跳过或自行校验 release 校验和。
 
 ---
 <!-- 后续条目：复制上面的分节模板，编号 ++，并在顶部索引表加一行 -->
