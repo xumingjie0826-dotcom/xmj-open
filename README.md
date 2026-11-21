@@ -16,7 +16,7 @@
 | 01 | huashu-design（花叔Design） | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) | HTML 原生设计 skill（原型/deck/动效/信息图等） | 高 | 基础版即可用 | 低 | 已收藏 |
 | 02 | plannotator | [backnotprop/plannotator](https://github.com/backnotprop/plannotator) | 给 AI 编码 agent 的本地批注/审阅界面（计划/diff/PR） | 高 | 中（未官方支持 Trae） | 中 | 已收藏 |
 | 03 | vibe-knowledge-film | [HeyChengC/vibe-knowledge-film](https://github.com/HeyChengC/vibe-knowledge-film) | 代码直出「无旁白」知识短片（抖音 Vibe 知识大赏风） | 高（科普向） | 中（需 Chrome/ffmpeg） | 低 | 已收藏 |
-| 04 | last30days-skill | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 按真人互动信号排名的人物/公司/话题调研引擎 | 高 | 中（走 Agentskills/MCP） | 中 | 已收藏 |
+| 04 | last30days-skill | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 按真人互动信号排名的人物/公司/话题调研引擎 | 高（海外向） | 中（中文源仅小红书） | 中 | 已收藏 |
 
 ---
 
@@ -128,6 +128,7 @@ python engine/render.py <工程目录> --sheet 3 8 15 22   # 指定时刻拼图�
 | 一句话 | 「按真人互动信号排名」的研究引擎：并行搜 Reddit / X / YouTube / TikTok / HN / Polymarket / GitHub，外加专利、招聘等，再由 LLM 汇总成一份简报。 |
 | 价值 | 高（做人物/公司/话题调研时）。卖点是「搜的是人不是编辑」。 |
 | 可用性 | 中。Claude Code 走 plugin marketplace；Codex/Cursor/Copilot/Gemini 等 50+ Agent Skills 宿主走 `npx skills add … -g`；另有 MCP server。默认零配置即可用 Reddit/HN/Polymarket/GitHub；完整能力需自备各平台 key/CLI。Trae 未点名，走 Agentskills / MCP 路线。 |
+| 中文支持 | **很有限**：唯一的中文平台是**小红书**，且要本机跑 `x-mcp` 浏览器插件或 `xiaohongshu-mcp` 服务、用 `--search xhs` 显式请求。**没有**微信 / 微博 / 知乎 / B站 / 抖音国内版 / 雪球 / 东方财富 / 今日头条。 |
 | 风险 | 中（能力大、触点多，但文档极其完整、开关齐全）。要点：会把你填的 topic 发给多个第三方服务；可读取浏览器 cookie（默认关，需明确同意）；会安装外部 CLI（npx 包 / yt-dlp 等）；默认**无遥测**。 |
 | 状态 | 已收藏 |
 
@@ -149,6 +150,7 @@ npx skills add mvanhorn/last30days-skill -g
 **注意**
 - 是「研究工具」不是「搜索框」：输出的是一份综合简报，耗 token、耗时间。
 - 注意数据外发范围：topic 会送到所有启用的来源；想要纯本地重排，就别配 Gemini/OpenAI/xAI/OpenRouter 的 key。
+- **对你的用途（个人工作台里的"公司讯息 + 行业知识"汇总）**：**不太适合**。它的强项是英文/海外的人物与公司调研，中文源基本缺失（只有小红书）；中文公司/行业资料建议另找中文源方案。
 
 ---
 <!-- 后续条目：复制上面的分节模板，编号 ++，并在顶部索引表加一行 -->
